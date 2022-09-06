@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AppMarvel</string>
+    <string name="text_view_main_activity_description">This app shows a list of characters and their characteristics from the Marvel Universe</string>
+    <string name="text_button_main_activity">GO TO APP</string>
 </resources>
