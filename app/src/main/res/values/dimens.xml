@@ -4,4 +4,5 @@
     <dimen name="main_activity_text_padding">30dp</dimen>
     <dimen name="main_activity_description_margin">350dp</dimen>
     <dimen name="main_activity_button_margin">150dp</dimen>
+    <dimen name="char_activity_title_margin">50dp</dimen>
 </resources>

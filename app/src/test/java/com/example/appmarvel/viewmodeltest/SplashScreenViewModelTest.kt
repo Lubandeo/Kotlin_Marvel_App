@@ -1,7 +1,7 @@
-package com.example.appmarvel
+package com.example.appmarvel.viewmodeltest
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.appmarvel.viewmodel.SplashScreenViewModel
+import com.example.appmarvel.mvvm.viewmodel.SplashScreenViewModel
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
