@@ -3,7 +3,7 @@ package com.example.appmarvel.service.utils
 import com.example.appmarvel.entity.Character
 import com.example.appmarvel.service.response.DataResponse
 
-fun DataResponse.transformData(): List<Character> {
+fun DataResponse.transformDataResponse(): List<Character> {
     val characterList = mutableListOf<Character>()
     data.results.forEach {
         characterList.add(
