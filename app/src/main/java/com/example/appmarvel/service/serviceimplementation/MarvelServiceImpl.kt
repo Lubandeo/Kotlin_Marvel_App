@@ -5,9 +5,7 @@ import com.example.appmarvel.service.ServiceGenerator
 import com.example.appmarvel.service.api.MarvelApi
 import com.example.appmarvel.service.serviceinterface.MarvelService
 import com.example.appmarvel.service.utils.Result
-import com.example.appmarvel.service.utils.transformData
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import com.example.appmarvel.service.utils.transformDataResponse
 
 class MarvelServiceImpl(private val api: ServiceGenerator) : MarvelService {
 
@@ -17,7 +15,7 @@ class MarvelServiceImpl(private val api: ServiceGenerator) : MarvelService {
             val response = callResponse.execute()
             if (response.isSuccessful)
                 response.body()?.let {
-                    return Result.Success(it.transformData())
+                    return Result.Success(it.transformDataResponse())
                 }
         } catch (e: Exception) {
             return Result.Failure(e)

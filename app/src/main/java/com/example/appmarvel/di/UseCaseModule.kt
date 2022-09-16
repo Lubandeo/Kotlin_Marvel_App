@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 object UseCaseModule {
     val useCaseModule = module {
-        factory<GetCharactersListUseCase> { GetCharactersListUseCaseImpl(get()) }
+        factory<GetCharactersListUseCase> { GetCharactersListUseCaseImpl(get(),get()) }
     }
 }

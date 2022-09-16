@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.appmarvel.service.response.CharacterResponse
 import com.example.appmarvel.service.response.DataResponse
 import com.example.appmarvel.service.response.ResultResponse
-import com.example.appmarvel.service.utils.transformData
+import com.example.appmarvel.service.utils.transformDataResponse
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -14,7 +14,7 @@ import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class CharacterListMapperTest {
+class DataResponseMapperTest {
 
     private lateinit var resultResponse: ResultResponse
     private lateinit var dataResponse: DataResponse
@@ -34,7 +34,7 @@ class CharacterListMapperTest {
 
     @Test
     fun `transforming data response to character list`() {
-        val response = dataResponse.transformData()
+        val response = dataResponse.transformDataResponse()
 
         assertEquals(response[0].id, resultResponse.results[0].id)
         assertEquals(response[0].name, resultResponse.results[0].name)
