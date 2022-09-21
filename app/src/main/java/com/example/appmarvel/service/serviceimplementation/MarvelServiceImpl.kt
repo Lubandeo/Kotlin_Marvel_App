@@ -5,7 +5,7 @@ import com.example.appmarvel.service.ServiceGenerator
 import com.example.appmarvel.service.api.MarvelApi
 import com.example.appmarvel.service.serviceinterface.MarvelService
 import com.example.appmarvel.service.utils.Result
-import com.example.appmarvel.service.utils.transformDataResponse
+import com.example.appmarvel.service.utils.extension.transformDataResponse
 
 class MarvelServiceImpl(private val api: ServiceGenerator) : MarvelService {
 
