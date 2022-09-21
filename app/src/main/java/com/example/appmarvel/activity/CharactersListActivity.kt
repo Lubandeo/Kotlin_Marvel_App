@@ -3,8 +3,10 @@ package com.example.appmarvel.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.appmarvel.R
+import com.example.appmarvel.adapter.CharacterAdapter
 import com.example.appmarvel.databinding.ActivityCharactersListBinding
 import com.example.appmarvel.entity.Character
 import com.example.appmarvel.mvvm.viewmodel.CharactersListViewModel
@@ -27,18 +29,19 @@ class CharactersListActivity : AppCompatActivity(), KoinComponent {
 
     private fun changeStateCharacterList(charactersListData: CharactersListViewModel.CharactersListData) {
         when (charactersListData.charactersState) {
-            FETCH_CHARACTERS -> showCharactersListOnTextView(charactersListData.data)
+            FETCH_CHARACTERS -> showCharactersList(charactersListData.data)
             ERROR_CHARACTERS_NOT_FOUND -> showErrorMessage(R.string.error_message_char_not_found)
             ERROR_OTHER -> showErrorMessage(R.string.error_message_not_exception)
         }
     }
 
-    private fun showCharactersListOnTextView(charactersList: List<Character>) {
-        binding.textViewCharactersActivityCharactersList.text = charactersList.toString()
+    private fun showCharactersList(charactersList: List<Character>) {
+        binding.errorFetchingCharactersTextView.visibility = View.GONE
+        binding.recyclerViewCharactersList.adapter = CharacterAdapter(charactersList)
     }
 
     private fun showErrorMessage(errorId: Int) {
-        binding.textViewCharactersActivityCharactersList.text = getString(errorId)
+        binding.errorFetchingCharactersTextView.text = getString(errorId)
     }
 
     companion object {

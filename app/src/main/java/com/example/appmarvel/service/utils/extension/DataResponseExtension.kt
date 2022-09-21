@@ -1,4 +1,4 @@
-package com.example.appmarvel.service.utils
+package com.example.appmarvel.service.utils.extension
 
 import com.example.appmarvel.entity.Character
 import com.example.appmarvel.service.response.DataResponse
@@ -10,7 +10,8 @@ fun DataResponse.transformDataResponse(): List<Character> {
             Character(
                 it.id,
                 it.name,
-                it.description
+                it.description,
+                it.thumbnail.getURL()
             )
         )
     }

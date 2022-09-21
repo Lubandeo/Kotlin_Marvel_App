@@ -4,8 +4,8 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.appmarvel.entity.Character
 import com.example.appmarvel.service.utils.Result
-import com.example.appmarvel.service.utils.transformCharacter
-import com.example.appmarvel.service.utils.transformListCharacterEntity
+import com.example.appmarvel.service.utils.extension.transformCharacter
+import com.example.appmarvel.service.utils.extension.transformListCharacterEntity
 
 @Database(
     entities = [CharacterEntity::class],
@@ -14,17 +14,17 @@ import com.example.appmarvel.service.utils.transformListCharacterEntity
 
 abstract class MarvelDataBaseImpl : RoomDatabase(), MarvelDataBase {
 
-    abstract fun marvelDaO():MarvelDaO
+    abstract fun marvelDaO(): MarvelDaO
 
-    override fun getCharacters():Result<List<Character>> = marvelDaO().getCharacters().let{
-        if (it.isNotEmpty()){
+    override fun getCharacters(): Result<List<Character>> = marvelDaO().getCharacters().let {
+        if (it.isNotEmpty()) {
             Result.Success(it.transformListCharacterEntity())
-        }else{
+        } else {
             Result.Failure(Exception(ERROR_CHARACTERS_NOT_FOUND))
         }
     }
 
-    override fun updateCharacters(charactersList:List<Character>){
+    override fun updateCharacters(charactersList: List<Character>) {
         charactersList.forEach {
             marvelDaO().insertCharacter(it.transformCharacter())
         }
