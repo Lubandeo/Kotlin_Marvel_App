@@ -9,7 +9,14 @@ import com.example.appmarvel.R
 import com.example.appmarvel.databinding.CardViewCharacterBinding
 import com.example.appmarvel.entity.Character
 
-class CharacterAdapter(private val charactersList: List<Character>) :
+interface CharacterFragmentListener {
+    fun setOnClickListener(id: String)
+}
+
+class CharacterAdapter(
+    private val charactersList: List<Character>,
+    private val characterFragmentListener: CharacterFragmentListener
+) :
     RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -19,16 +26,17 @@ class CharacterAdapter(private val charactersList: List<Character>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(charactersList[position])
+        holder.bind(charactersList[position], characterFragmentListener)
     }
 
     override fun getItemCount(): Int = charactersList.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = CardViewCharacterBinding.bind(itemView)
-        fun bind(item: Character) {
+        fun bind(item: Character, characterFragmentListener: CharacterFragmentListener) {
             item.let {
                 binding.apply {
+                    this.cardViewCharacter.setOnClickListener { characterFragmentListener.setOnClickListener(item.id) }
                     this.textViewCharacterName.text = item.name
                     Glide.with(itemView.context)
                         .load(item.imageURL)

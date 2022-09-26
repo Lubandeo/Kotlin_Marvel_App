@@ -5,4 +5,5 @@ import com.example.appmarvel.service.utils.Result
 
 interface MarvelService {
     fun getCharactersList(): Result<List<Character>>
+    fun getCharacterById(characterId: String): Result<Character>
 }

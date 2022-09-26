@@ -8,7 +8,10 @@ import androidx.room.Query
 @Dao
 interface MarvelDaO {
     @Query("SELECT * FROM character_table")
-    fun getCharacters():List<CharacterEntity>
+    fun getCharacters(): List<CharacterEntity>
+
+    @Query("SELECT * FROM character_table WHERE id = :characterId")
+    fun getCharacterById(characterId: String): List<CharacterEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCharacter(characterEntity: CharacterEntity)
