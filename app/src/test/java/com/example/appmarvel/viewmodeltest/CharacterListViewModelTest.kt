@@ -1,6 +1,7 @@
 package com.example.appmarvel.viewmodeltest
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.appmarvel.adapter.CharacterFragmentListener
 import com.example.appmarvel.entity.Character
 import com.example.appmarvel.mvvm.model.CharacterListModel
 import com.example.appmarvel.mvvm.viewmodel.CharactersListViewModel
@@ -32,6 +33,7 @@ class CharacterListViewModelTest {
     private val getCharactersListUseCase: GetCharactersListUseCase = mock()
     private val charactersList: List<Character> = mock()
     private val exception: Exception = mock()
+    private val listener: CharacterFragmentListener = mock()
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
@@ -64,7 +66,13 @@ class CharacterListViewModelTest {
     @Test
     fun `when fetchCharacters returns failure -notfound-  result`() {
         val charactersLiveData = characterListViewModel.charactersListState.testObserver()
-        whenever(getCharactersListUseCase()).thenReturn(Result.Failure(Exception(CHARACTERS_NOT_FOUND)))
+        whenever(getCharactersListUseCase()).thenReturn(
+            Result.Failure(
+                Exception(
+                    CHARACTERS_NOT_FOUND
+                )
+            )
+        )
 
         runBlocking { characterListViewModel.fetchCharactersList().join() }
         assertEquals(
@@ -85,7 +93,14 @@ class CharacterListViewModelTest {
         )
     }
 
+    @Test
+    fun `when onCharacterCardPressed`() {
+        characterListViewModel.onCharacterCardPressed(ID)
+        assertEquals(ID, characterListViewModel.charactersListState.value?.id)
+    }
+
     companion object {
         private const val CHARACTERS_NOT_FOUND = "CHARACTERS_NOT_FOUND"
+        private const val ID = "1017100"
     }
 }

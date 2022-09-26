@@ -5,16 +5,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import com.example.appmarvel.R
 import com.example.appmarvel.adapter.CharacterAdapter
+import com.example.appmarvel.adapter.CharacterFragmentListener
 import com.example.appmarvel.databinding.ActivityCharactersListBinding
 import com.example.appmarvel.entity.Character
+import com.example.appmarvel.fragment.CharacterFragment
 import com.example.appmarvel.mvvm.viewmodel.CharactersListViewModel
 import com.example.appmarvel.mvvm.viewmodel.CharactersListViewModel.CharactersListState.*
+import com.example.appmarvel.service.utils.Constants.CHARACTER_FRAGMENT
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class CharactersListActivity : AppCompatActivity(), KoinComponent {
+class CharactersListActivity : AppCompatActivity(), KoinComponent, CharacterFragmentListener {
 
     private val viewModel: CharactersListViewModel by inject()
     private lateinit var binding: ActivityCharactersListBinding
@@ -32,16 +36,26 @@ class CharactersListActivity : AppCompatActivity(), KoinComponent {
             FETCH_CHARACTERS -> showCharactersList(charactersListData.data)
             ERROR_CHARACTERS_NOT_FOUND -> showErrorMessage(R.string.error_message_char_not_found)
             ERROR_OTHER -> showErrorMessage(R.string.error_message_not_exception)
+            FETCH_CHARACTER_DETAILS -> showCharacterDetails(charactersListData.id)
         }
     }
 
     private fun showCharactersList(charactersList: List<Character>) {
         binding.errorFetchingCharactersTextView.visibility = View.GONE
-        binding.recyclerViewCharactersList.adapter = CharacterAdapter(charactersList)
+        binding.recyclerViewCharactersList.adapter = CharacterAdapter(charactersList, this)
     }
 
     private fun showErrorMessage(errorId: Int) {
         binding.errorFetchingCharactersTextView.text = getString(errorId)
+    }
+
+    override fun setOnClickListener(id: String) {
+        viewModel.onCharacterCardPressed(id)
+    }
+
+    private fun showCharacterDetails(id: String) {
+        val characterFragment = CharacterFragment.newInstance(id)
+        characterFragment.show(supportFragmentManager, CHARACTER_FRAGMENT)
     }
 
     companion object {

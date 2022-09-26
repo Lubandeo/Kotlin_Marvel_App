@@ -1,7 +1,7 @@
 package com.example.appmarvel.usecasetest
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.appmarvel.database.MarvelDataBase
+import com.example.appmarvel.database.MarvelRepository
 import com.example.appmarvel.entity.Character
 import com.example.appmarvel.service.serviceinterface.MarvelService
 import com.example.appmarvel.service.utils.Result
@@ -22,7 +22,7 @@ import org.mockito.kotlin.whenever
 class GetCharactersListUseCaseTest {
 
     private val marvelService: MarvelService = mock()
-    private val marvelDatabase: MarvelDataBase = mock()
+    private val marvelDatabase: MarvelRepository = mock()
     private val listOfCharacters: List<Character> = mock()
     private lateinit var getCharactersListUseCase: GetCharactersListUseCase
 
@@ -42,31 +42,29 @@ class GetCharactersListUseCaseTest {
 
         verify(marvelDatabase).updateCharacters(listOfCharacters)
         verify(marvelDatabase).getCharacters()
-        assertEquals(listOfCharacters,(result as Result.Success).data)
+        assertEquals(listOfCharacters, (result as Result.Success).data)
     }
 
     @Test
     fun `when service result returns failure - empty database`() {
-        whenever(marvelService.getCharactersList()).thenReturn(Result.Failure(Exception(
-            CHARACTERS_NOT_FOUND)))
-        whenever(marvelDatabase.getCharacters()).thenReturn(Result.Failure(Exception(
-            CHARACTERS_NOT_FOUND)))
+        whenever(marvelService.getCharactersList()).thenReturn(Result.Failure(Exception(CHARACTERS_NOT_FOUND)))
+        whenever(marvelDatabase.getCharacters()).thenReturn(Result.Failure(Exception(CHARACTERS_NOT_FOUND)))
         val result = getCharactersListUseCase()
 
         verify(marvelDatabase).getCharacters()
-        assertEquals(CHARACTERS_NOT_FOUND,(result as Result.Failure).exception.message)
+        assertEquals(CHARACTERS_NOT_FOUND, (result as Result.Failure).exception.message)
     }
 
     @Test
     fun `when service result returns failure - database has data`() {
-        whenever(marvelService.getCharactersList()).thenReturn(Result.Failure(Exception(
-            CHARACTERS_NOT_FOUND)))
+        whenever(marvelService.getCharactersList()).thenReturn(Result.Failure(Exception(CHARACTERS_NOT_FOUND)))
         whenever(marvelDatabase.getCharacters()).thenReturn(Result.Success(listOfCharacters))
         val result = getCharactersListUseCase()
 
         verify(marvelDatabase).getCharacters()
-        assertEquals(listOfCharacters,(result as Result.Success).data)
+        assertEquals(listOfCharacters, (result as Result.Success).data)
     }
+
     companion object {
         private const val CHARACTERS_NOT_FOUND = "CHARACTERS_NOT_FOUND"
     }
