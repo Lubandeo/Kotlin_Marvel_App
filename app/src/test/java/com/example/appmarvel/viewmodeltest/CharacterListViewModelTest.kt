@@ -1,13 +1,12 @@
 package com.example.appmarvel.viewmodeltest
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.appmarvel.adapter.CharacterFragmentListener
-import com.example.appmarvel.entity.Character
 import com.example.appmarvel.mvvm.model.CharacterListModel
 import com.example.appmarvel.mvvm.viewmodel.CharactersListViewModel
-import com.example.appmarvel.service.utils.Result
 import com.example.appmarvel.testObserver
-import com.example.appmarvel.usecase.GetCharactersListUseCase
+import com.example.domain.entity.Character
+import com.example.domain.usecase.GetCharactersListUseCase
+import com.example.domain.utils.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -33,7 +32,6 @@ class CharacterListViewModelTest {
     private val getCharactersListUseCase: GetCharactersListUseCase = mock()
     private val charactersList: List<Character> = mock()
     private val exception: Exception = mock()
-    private val listener: CharacterFragmentListener = mock()
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()

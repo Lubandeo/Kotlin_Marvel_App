@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">AppMarvel</string>
-    <string name="repository_name">MarvelRepository</string>
     <string name="text_view_main_activity_description">This app shows a list of characters and their characteristics from the Marvel Universe</string>
     <string name="text_button_main_activity">GO TO APP</string>
     <string name="error_message_char_not_found">The characters were not found</string>

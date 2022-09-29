@@ -8,8 +8,8 @@ import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.example.appmarvel.R
 import com.example.appmarvel.databinding.FragmentCharacterBinding
-import com.example.appmarvel.entity.Character
 import com.example.appmarvel.mvvm.viewmodel.CharacterFragmentViewModel
+import com.example.domain.entity.Character
 import org.koin.android.ext.android.inject
 import org.koin.core.component.KoinComponent
 
@@ -46,7 +46,6 @@ class CharacterFragment : DialogFragment(), KoinComponent {
     }
 
     private fun showCharacter(character: Character?) {
-
         character.let {
             binding.errorFetchingCharacterTextView.visibility = View.GONE
             binding.apply {

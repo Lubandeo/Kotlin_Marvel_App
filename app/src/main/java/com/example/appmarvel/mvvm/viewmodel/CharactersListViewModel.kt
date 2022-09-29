@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.appmarvel.entity.Character
 import com.example.appmarvel.mvvm.model.CharacterListModel
-import com.example.appmarvel.service.utils.Constants.CHARACTERS_NOT_FOUND
-import com.example.appmarvel.service.utils.Constants.EMPTY_STRING
-import com.example.appmarvel.service.utils.Result
+import com.example.domain.entity.Character
+import com.example.domain.utils.Constants.CHARACTERS_NOT_FOUND
+import com.example.domain.utils.Constants.EMPTY_STRING
+import com.example.domain.utils.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

@@ -5,16 +5,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
 import com.example.appmarvel.R
 import com.example.appmarvel.adapter.CharacterAdapter
 import com.example.appmarvel.adapter.CharacterFragmentListener
 import com.example.appmarvel.databinding.ActivityCharactersListBinding
-import com.example.appmarvel.entity.Character
 import com.example.appmarvel.fragment.CharacterFragment
 import com.example.appmarvel.mvvm.viewmodel.CharactersListViewModel
-import com.example.appmarvel.mvvm.viewmodel.CharactersListViewModel.CharactersListState.*
-import com.example.appmarvel.service.utils.Constants.CHARACTER_FRAGMENT
+import com.example.appmarvel.mvvm.viewmodel.CharactersListViewModel.CharactersListState.FETCH_CHARACTERS
+import com.example.appmarvel.mvvm.viewmodel.CharactersListViewModel.CharactersListState.ERROR_CHARACTERS_NOT_FOUND
+import com.example.appmarvel.mvvm.viewmodel.CharactersListViewModel.CharactersListState.ERROR_OTHER
+import com.example.appmarvel.mvvm.viewmodel.CharactersListViewModel.CharactersListState.FETCH_CHARACTER_DETAILS
+import com.example.domain.entity.Character
+import com.example.domain.utils.Constants.CHARACTER_FRAGMENT
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
