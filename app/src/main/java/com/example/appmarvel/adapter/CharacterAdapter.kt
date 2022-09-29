@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.appmarvel.R
 import com.example.appmarvel.databinding.CardViewCharacterBinding
-import com.example.appmarvel.entity.Character
+import com.example.domain.entity.Character
 
 interface CharacterFragmentListener {
     fun setOnClickListener(id: String)
@@ -36,7 +36,11 @@ class CharacterAdapter(
         fun bind(item: Character, characterFragmentListener: CharacterFragmentListener) {
             item.let {
                 binding.apply {
-                    this.cardViewCharacter.setOnClickListener { characterFragmentListener.setOnClickListener(item.id) }
+                    this.cardViewCharacter.setOnClickListener {
+                        characterFragmentListener.setOnClickListener(
+                            item.id
+                        )
+                    }
                     this.textViewCharacterName.text = item.name
                     Glide.with(itemView.context)
                         .load(item.imageURL)
